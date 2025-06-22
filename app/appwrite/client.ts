@@ -1,7 +1,7 @@
 import { Account, Client, Databases, Storage } from 'appwrite'
 
-export const appWriteConfig = {
-    endpointUrl: import.meta.env.VITE_APPWRITE_ENDPOINT,
+export const appwriteConfig = {
+    endpointUrl: import.meta.env.VITE_APPWRITE_API_ENDPOINT,
     projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
     apiKey: import.meta.env.VITE_APPWRITE_API_KEY,
     databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
@@ -10,8 +10,8 @@ export const appWriteConfig = {
 }
 
 const client = new Client()
-        .setEndpoint(appWriteConfig.endpointUrl) // Your Appwrite Endpoint
-        .setProject(appWriteConfig.projectId) // Your Appwrite Project ID
+        .setEndpoint(appwriteConfig.endpointUrl) // Your Appwrite Endpoint
+        .setProject(appwriteConfig.projectId) // Your Appwrite Project ID
 
 const account = new Account(client)
 const database = new Databases(client)

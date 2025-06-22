@@ -1,14 +1,25 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useLoaderData, useNavigate } from 'react-router'
 import { sidebarItems } from '~/constants'
 import { cn } from '~/lib/utils'
+import { logoutUser } from '~/appwrite/auth'
 
 const NavItems = ({handleClick} : {handleClick?: () => void}) => {
 
-    const user = {
-        name: 'Wasim',
-        email: 'contact@gmail.com',
-        imageUrl: '/assets/images/user.png',
+    // const user = {
+    //     name: 'Wasim',
+    //     email: 'contact@gmail.com',
+    //     imageUrl: '/assets/images/user.png',
+    // }
+
+    const user = useLoaderData();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        // Perform logout logic here, e.g., clear user session, redirect to login page
+        console.log('User logged out');
+        await logoutUser(); // Call the logout function
+        navigate('/sign-in'); // Redirect to sign-in page after logout
     }
 
     return (
@@ -34,14 +45,18 @@ const NavItems = ({handleClick} : {handleClick?: () => void}) => {
                         </NavLink>
                     ))}
                 </nav>
+                
                 <footer className="nav-footer">
-                    <img src={user?.image || 'assets/images/david.webp'} alt={user?.name || 'David'} />
+                    <img src={user?.imageUrl || 'assets/images/david.webp'} 
+                    alt={user?.name || 'David'}
+                    referrerPolicy='no-referrer'
+                    />
                     <article>
                         <h2>{user?.name}</h2>
                         <p>{user?.email}</p>
                     </article>
                     <button 
-                        onClick={() => console.log('Logout')}
+                        onClick={ handleLogout }
                         className="cursor-pointer"
                     >
                         <img src="/assets/icons/logout.svg" alt="Logout" className="size-6" />   

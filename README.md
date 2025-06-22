@@ -85,3 +85,39 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 ---
 
 Built with ❤️ using React Router.
+
+
+## NPM packages installation
+If you are cloning this repo, bydefault you will get the packages in composer file 
+
+If you want to build the project without cloning this repo, the following packages are to be installed via terminal
+
+
+npm install @google/generative-ai 
+
+
+## vite config
+
+import { reactRouter } from "@react-router/dev/vite";
+import { sentryReactRouter, type SentryReactRouterBuildOptions } from '@sentry/react-router';
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+
+
+const sentryConfig: SentryReactRouterBuildOptions = {
+  org: "js-mastery-iv",
+  project: "travel-agency",
+  // An auth token is required for uploading source maps.
+  authToken: ""
+  // ...
+};
+
+export default defineConfig(config => {
+  return {
+    plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), sentryReactRouter(sentryConfig, config)],
+    ssr: {
+      noExternal: [/@syncfusion/]
+    }
+  };
+});
