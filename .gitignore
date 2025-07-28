@@ -5,5 +5,5 @@
 /.react-router/
 /build/
 
-.env.local
-vite.config.ts
+# .env.local
+# vite.config.ts
